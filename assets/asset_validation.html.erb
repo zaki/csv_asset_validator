@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>Asset Validation Results</title>
+    <style type="text/css">
+      body {
+        color: #333;
+        background: #eee;
+        padding: 0 20px;
+      }
+      h1 {
+        color: ##4E4E4E;
+      }
+      p {
+        margin: 5px 0;
+      }
+      table {
+        background: white;
+        border: 1px solid #666;
+        border-collapse: collapse;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+      table th, table td {
+        padding: 4px;
+        border: 1px solid #D0D0D0;
+      }
+      table th {
+        background-color: #DFC;
+        color: #337022;
+      }
+      table td.filename {
+        color: #ED1556;
+      }
+
+      table td.missing {
+        background-color: #ed1556;
+        color: #fff;
+      }
+      table td.invalid {
+        background-color: #ffffc0;
+        color: #333350;
+      }
+    </style>
+  </head>
+  <body>
+    <% @messages.each_pair do |entity, messages| %>
+      <h1><%= entity %></h1>
+      <p>
+        <% if messages.empty? %>
+          No error found. Cool!
+        <% else %>
+          Found <%= messages.size %> problems.
+        <% end %>
+      </p>
+      <table>
+        <tr>
+          <th>Type</th>
+          <th>File</th>
+          <th>Message</th>
+        </tr>
+        <% messages.each do |type, file, message| %>
+          <tr>
+            <td class="<%=type%>">
+              <%= type.to_s.upcase %>
+            </td>
+            <td class="file">
+              <%= file %>
+            </td>
+            <td class="message"><%= message %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% end%>
+  </body>
+</html>
